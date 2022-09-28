@@ -14,9 +14,7 @@ const Widgets = ({ trendingResults, followResults }) => {
           <MagnifyingGlassMinusIcon className='text-gray-500 h-5 z-50' />
           <input
             type='text'
-            className='bg-transparent placeholder-gray-500 
-            outline-none text-[#d9d9d9] absolute inset-0
-            pl-11 border border-transparent w-full'
+            className='bg-transparent placeholder-gray-500 outline-none text-[#d9d9d9] absolute inset-0 pl-11 border border-transparent w-full focus:border-[#1d9bf0] rounded-full focus:bg-black focus:shadow-lg'
             placeholder='Search Twitter'
           />
         </div>
@@ -56,8 +54,12 @@ const Widgets = ({ trendingResults, followResults }) => {
               </h4>
               <h5 className='text-gray-500 text-[15px]'>{result.tag}</h5>
             </div>
-            <button className='ml-auto bg-white text-black rounded-full
-            font-bold text-sm py-1.5 px-3.5'>Follow</button>
+            <button
+              className='ml-auto bg-white text-black rounded-full
+            font-bold text-sm py-1.5 px-3.5'
+            >
+              Follow
+            </button>
           </div>
         ))}
         <button className='widgets-btn'>Show more</button>
