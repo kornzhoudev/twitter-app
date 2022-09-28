@@ -1,9 +1,11 @@
-import { SparklesIcon } from '@heroicons/react/24/outline';
 import React, { useState, useEffect } from 'react';
+import { SparklesIcon } from '@heroicons/react/24/outline';
 import { onSnapshot, collection, query, orderBy } from '@firebase/firestore';
+import { useRecoilState } from 'recoil';
+import { modalState } from '../../atoms/modalAtom';
 import { db } from '../../firebase';
 import Input from './Input';
-import Post from './Post';
+import Post from '../Post';
 import { useSession } from 'next-auth/react';
 
 const Feed = () => {
