@@ -6,8 +6,8 @@ import { modalState } from '../atoms/modalAtom';
 import Feed from '../components/Feed';
 import Sidebar from '../components/Sidebar';
 import Login from '../components/Login';
-import Modal from '../components/Modal';
 import Widgets from '../components/Widgets.js';
+import Modal from '../components/Modal';
 
 export default function Home({ trendingResults, followResults, providers }) {
   const { data: session } = useSession();
