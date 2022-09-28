@@ -7,6 +7,7 @@ import Feed from '../components/Feed';
 import Sidebar from '../components/Sidebar';
 import Login from '../components/Login';
 import Modal from '../components/Modal';
+import Widgets from '../components/Widgets.js';
 
 export default function Home({ trendingResults, followResults, providers }) {
   const { data: session } = useSession();
@@ -19,7 +20,10 @@ export default function Home({ trendingResults, followResults, providers }) {
       <main className='bg-black min-h-screen flex max-w-[1500px] mx-auto'>
         <Sidebar />
         <Feed />
-
+        <Widgets
+          trendingResults={trendingResults}
+          followResults={followResults}
+        />
         {isOpen && <Modal />}
       </main>
     </>
@@ -27,19 +31,20 @@ export default function Home({ trendingResults, followResults, providers }) {
 }
 
 export async function getServerSideProps(context) {
-  // const data = await fetch('https://jsonkeeper.com/b/NKEV');
-  // const trendingResults = await data.json();
-
-  // const data1 = await fetch('https://jsonkeeper.com/b/WWMJ');
-  // const followResults = await data1.json();
+  const trendingResults = await fetch('https://www.jsonkeeper.com/b/NKEV').then(
+    (res) => res.json()
+  );
+  const followResults = await fetch('https://www.jsonkeeper.com/b/WWMJ').then(
+    (res) => res.json()
+  );
 
   const providers = await getProviders();
   const session = await getSession(context);
 
   return {
     props: {
-      // trendingResults,
-      // followResults,
+      trendingResults,
+      followResults,
       providers,
       session,
     },

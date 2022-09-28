@@ -28,4 +28,11 @@
   .modal{
     @apply inline-block align-bottom bg-black rounded-2xl text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full
   }
+
+  .widgets-btn{
+    @apply hover:bg-white hover:bg-opacity-[0.03]
+        px-4 py-3 cursor-pointer transition duration-200
+        ease-out flex items-center justify-between w-full
+        text-[#1d9df0] font-light
+  }
 }

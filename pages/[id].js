@@ -4,13 +4,14 @@ import { useRouter } from 'next/router';
 import { getProviders, getSession, useSession } from 'next-auth/react';
 
 import { useRecoilState } from 'recoil';
-
 import { modalState } from '../atoms/modalAtom';
+
 import Sidebar from '../components/Sidebar';
 import Modal from '../components/Modal';
 import Post from '../components/Post';
 import Login from '../components/Login';
 import Comment from '../components/Comment';
+import Widgets from '../components/Widgets.js';
 import { db } from '../firebase';
 import {
   collection,
@@ -94,6 +95,10 @@ const PostPage = ({ trendingResults, followResults, providers }) => {
           )}
         </div>
 
+        <Widgets
+          trendingResults={trendingResults}
+          followResults={followResults}
+        />
         {isOpen && <Modal />}
       </main>
     </>
@@ -103,19 +108,20 @@ const PostPage = ({ trendingResults, followResults, providers }) => {
 export default PostPage;
 
 export async function getServerSideProps(context) {
-  // const data = await fetch('https://jsonkeeper.com/b/NKEV');
-  // const trendingResults = await data.json();
-
-  // const data1 = await fetch('https://jsonkeeper.com/b/WWMJ');
-  // const followResults = await data1.json();
+  const trendingResults = await fetch('https://www.jsonkeeper.com/b/NKEV').then(
+    (res) => res.json()
+  );
+  const followResults = await fetch('https://www.jsonkeeper.com/b/WWMJ').then(
+    (res) => res.json()
+  );
 
   const providers = await getProviders();
   const session = await getSession(context);
 
   return {
     props: {
-      // trendingResults,
-      // followResults,
+      trendingResults,
+      followResults,
       providers,
       session,
     },
