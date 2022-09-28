@@ -1,8 +1,38 @@
 import { SparklesIcon } from '@heroicons/react/24/outline';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Input from './Input';
+import { useSession } from 'next-auth/react';
 
 const Feed = () => {
+  const { data: session } = useSession();
+  const [posts, setPosts] = useState([]);
+
+  // MESSY
+  // useEffect(() => {
+  //   const unsubscribe = onSnapshot(
+  //     query(collection(db, "posts"), orderBy("timestamp", "desc")),
+  //     (snapshot) => {
+  //       setPosts(snapshot.docs);
+  //     }
+  //   );
+
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, [db]);
+
+  // CLEAN
+  useEffect(
+    () =>
+      onSnapshot(
+        query(collection(db, 'posts'), orderBy('timestamp', 'desc')),
+        (snapshot) => {
+          setPosts(snapshot.docs);
+        }
+      ),
+    [db]
+  );
+
   return (
     <div
       className='text-white flex-grow border-l border-r
@@ -21,7 +51,9 @@ const Feed = () => {
           <SparklesIcon className='h-5 text-white' />
         </div>
       </div>
+
       <Input />
+      <div className='pb-72'></div>
     </div>
   );
 };

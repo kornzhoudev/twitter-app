@@ -1,12 +1,14 @@
 import React from 'react';
 import Image from 'next/image';
-import {
-  EllipsisHorizontalIcon,
-} from '@heroicons/react/24/outline';
+import { signOut, useSession } from 'next-auth/react';
+
+import { EllipsisHorizontalIcon } from '@heroicons/react/24/outline';
 import { IconList } from './IconList';
+
 import SidebarLink from './SidebarLink';
 
 const Sidebar = () => {
+  const { data: session } = useSession();
   return (
     <div
       className='hidden sm:flex flex-col items-center xl:items-start 
@@ -38,15 +40,16 @@ const Sidebar = () => {
       <div
         className='text-[#d9d9d9] flex items-center justify-center
       hoverAnimation xl:ml-auto xl:-mr-5 mt-auto'
+        onClick={signOut}
       >
         <img
-          src='http://www.qianhuaji.net/uploads/f6334e255e77e3dc1a13dc75f34dbe91.jpg'
+          src={session.user.image}
           alt=''
           className='h-10 w-10 rounded-full xl:mr-2.5'
         />
-        <div class='hidden xl:inline leading-5'>
-          <h4 className='font-bold text-white'>firebase 1885</h4>
-          <p className='text-[#6e767d]'>@firebase1885</p>
+        <div className='hidden xl:inline leading-5'>
+          <h4 className='font-bold text-white'>{session.user.name}</h4>
+          <p className='text-[#6e767d]'>@{session.user.tag}</p>
         </div>
         <EllipsisHorizontalIcon className='h-5 hidden xl:inline ml-10' />
       </div>
