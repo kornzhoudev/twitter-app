@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useSession } from 'next-auth/react';
 import { PhotoIcon, FaceSmileIcon } from '@heroicons/react/24/outline';
-import { XCircleIcon } from '@heroicons/react/24/outline';
+import { XMarkIcon } from '@heroicons/react/24/outline';
 
 import { db, storage } from '../../firebase';
 import {
@@ -101,7 +101,7 @@ const Input = () => {
             justify-center top-1 left-1 cursor-pointer'
                 onClick={() => setSelectedFile(null)}
               >
-                <XCircleIcon className='text-white h-5' />
+                <XMarkIcon className='text-white h-5' />
               </div>
               <img
                 src={selectedFile}
